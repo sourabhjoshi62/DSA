@@ -1,14 +1,14 @@
 class Solution {
     public int minEatingSpeed(int[] piles, int h) {
         long low = 1;
-        long high = piles[0];
-        long ans = -1;
-        for(long i:piles){
-            if(i>high){
-                high = i;
-            }
+        long high = 0;
+        long n = piles.length;
+      
+        for(int i:piles){
+            high = Math.max(i,high);
         }
-        while(low <= high){
+        long ans = 0;
+        while(low<=high){
             long mid = low + (high-low)/2;
             if(check(piles,h,mid)){
                 ans = mid;
@@ -18,29 +18,19 @@ class Solution {
             }
         }
         return (int)ans;
+
         
     }
-    public boolean check(int[] piles,int h,long hours){
+    public boolean check(int[] piles, int h, long hour){
         long cnt = 0;
-        for(long i:piles){
-           if(i<=hours){
-            cnt++;
-           }else{
-                long k = i/hours;
-                long rem = i%hours;
-                if(rem != 0){
-                    cnt += k + 1;
-                }else{
-                    cnt += k;
-                }
-           }
+        for(int i:piles){
+           cnt += (i + hour -1)/hour;
+
         }
-        if(cnt>h){
-            return false;
-        }else{
+        if(cnt<=h){
             return true;
-        }
-
+            }
+        else 
+        return false;
     }
-
 }
