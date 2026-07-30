@@ -1,14 +1,12 @@
 class Solution {
     public List<List<Integer>> fourSum(int[] nums, int target) {
-        //Please dont forget arrays sort
         Arrays.sort(nums);
-        List<List<Integer>> list = new ArrayList<>();
+        List<List<Integer>> ls = new ArrayList<>();
         int n = nums.length;
         for(int i=0;i<n-3;i++){
-            if(i>0 && nums[i]==nums[i-1]){
-                continue;
-            }
-            for(int j = i+1;j<n-2;j++){
+            if(i>0 && nums[i]==nums[i-1])continue;
+            
+            for(int j=i+1;j<n-2;j++){
                 if(j>i+1 && nums[j]==nums[j-1]){
                     continue;
                 }
@@ -18,20 +16,23 @@ class Solution {
                 while(a<b){
                     long sum = (long)nums[a] + nums[b];
                     if(sum == req){
-                        list.add(Arrays.asList(nums[i],nums[j],nums[a],nums[b]));
+                       ls.add(Arrays.asList(nums[i],nums[j],nums[a],nums[b]));
                         a++;
                         b--;
                         while(a<b && nums[a]==nums[a-1])a++;
                         while(a<b && nums[b]==nums[b+1])b--;
+
                     }else if(sum>req){
                         b--;
                     }else{
                         a++;
                     }
+                   
                 }
+
             }
         }
-        return list;
+        return ls;
         
     }
 }
